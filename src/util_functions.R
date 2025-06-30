@@ -62,7 +62,7 @@ weighted.mean.na.rm <- function(x, w) {
   #   - Use base R weighted.mean() function
   # Step 3: Return the weighted mean result
   
-  ###### YOUR CODE HERE ######
+  
 }
 
 
