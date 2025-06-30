@@ -24,8 +24,12 @@ get_rank <- function(x, n = 10) {
   # ceiling() # rounds a number up to the nearest integer
   # sum(!is.na(x)) # counts the number of valid observations in x
   
+  
   # 1. Compute the raw rank; NAs stay NA
   r <- rank(x, na.last = "keep")
+  
+  # 2. Count non‐missing observations
+  m <- sum(!is.na(x))
   
 }
 
