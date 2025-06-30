@@ -78,8 +78,9 @@ head(stock)
 
 # Calculate `momentum` as the cumulative log return 
 # from t-252 trading days to t-21 trading days
-
-######## YOUR CODE HERE ########
+# momentum = cum_log shifted by 21 days  – cum_log shifted by 252 days
+stock[, momentum := shift(cum_log_ret, 21) - shift(cum_log_ret, 252), by = permno]
+head(stock)
 
 # 4- Source utility functions ------------------------------------------------
 # This section loads helper functions that will be used for portfolio construction
