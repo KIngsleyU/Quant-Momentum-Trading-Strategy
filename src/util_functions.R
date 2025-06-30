@@ -40,7 +40,7 @@ get_rank <- function(x, n = 10) {
   # 5. rounds a number up to the nearest integer
   result <- ceiling(r_scaled)
   
-  
+  return(as.integer(result))
   
 }
 
