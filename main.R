@@ -62,6 +62,7 @@ setkeyv(stock, c("permno", "date"))
 # `cum_log_ret`: cumulative log returns for each stock 
 
 ######## YOUR CODE HERE ########
+stock$mcap = stock$prc * stock$shrout
 
 # 3- Calculate Momentum ----------------------------------------------
 
