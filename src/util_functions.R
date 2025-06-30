@@ -62,6 +62,12 @@ weighted.mean.na.rm <- function(x, w) {
   #   - Use base R weighted.mean() function
   # Step 3: Return the weighted mean result
   
+  # 1) Identify the index non‐missing pairs
+  idx <- !is.na(x) & !is.na(w)
+  
+  # 2) get valid subset of non-missing pairs
+  x_valid <- x[idx]
+  w_valid <- w[idx]
   
 }
 
