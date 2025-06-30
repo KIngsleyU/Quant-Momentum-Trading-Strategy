@@ -67,7 +67,7 @@ stock[, mcap := prc * shrout]
 # permno rather than ticker because permno is a permanent, unique identifier for 
 # a CRSP security, whereas tickers can and do change over time (and can even be 
 # reused by different companies)
-stock[, lag_mcap  := shift(mcap, 2), by = permno]
+stock[, lag_mcap := shift(mcap, 2), by = permno]
 
 # Transforms each simple return ret into a log return log(1+ret), then 
 # cumulatively sums it for each permno.
