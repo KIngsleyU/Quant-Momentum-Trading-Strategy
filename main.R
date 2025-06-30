@@ -68,6 +68,10 @@ stock[, mcap := prc * shrout]
 # a CRSP security, whereas tickers can and do change over time (and can even be 
 # reused by different companies)
 stock[, lag_mcap  := shift(mcap, 2), by = permno]
+
+# Transforms each simple return ret into a log return log(1+ret), then 
+# cumulatively sums it for each permno.
+stock[, cum_log_ret := cumsum(log1p(ret)), by = permno]
 head(stock)
 
 # 3- Calculate Momentum ----------------------------------------------
