@@ -61,8 +61,14 @@ setkeyv(stock, c("permno", "date"))
 # `lag_mcap`: market cap from 2 trading days prior
 # `cum_log_ret`: cumulative log returns for each stock 
 
-######## YOUR CODE HERE ########
-stock$mcap = stock$prc * stock$shrout
+stock[, mcap := prc * shrout]
+
+# Takes the value of mcap from 2 rows back within each stock (by = permno).
+# permno rather than ticker because permno is a permanent, unique identifier for 
+# a CRSP security, whereas tickers can and do change over time (and can even be 
+# reused by different companies)
+stock[, lag_mcap  := shift(mcap, 2), by = permno]
+head(stock)
 
 # 3- Calculate Momentum ----------------------------------------------
 
