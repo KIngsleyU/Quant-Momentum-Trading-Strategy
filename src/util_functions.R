@@ -34,8 +34,13 @@ get_rank <- function(x, n = 10) {
   # 3. Normalize the ranks, r to range from (1/n):1
   r_normalized <- r / m
   
-  # 4. Rescaled the ranks to range from 1:n
+  # 4. Re-scaled the ranks to range from 1:n
   r_scaled <- r_normalized * n
+  
+  # 5. rounds a number up to the nearest integer
+  result <- ceiling(r_scaled)
+  
+  
   
 }
 
