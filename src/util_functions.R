@@ -74,7 +74,17 @@ weighted.mean.na.rm <- function(x, w) {
     return(NA_real_)
   }
   
+  # 4) If total weight is zero, return NA to prevent undefined error
+  total_w <- sum(w_valid)
+  if (total_w == 0) {
+    return(NA_real_)
+  }
+  
+  # return the weighted mean result 
+  return(weighted.mean(x_valid, w_valid, na.rm = TRUE))
+  
 }
+
 
 
 get_portfolio <- function(trader_name = 'momentum',
