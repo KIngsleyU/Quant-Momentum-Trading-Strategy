@@ -31,6 +31,10 @@ get_rank <- function(x, n = 10) {
   # 2. Count non‐missing observations
   m <- sum(!is.na(x))
   
+  # an early‐exit guard for the case when there are no non‑missing values in x.
+  if (m == 0L) 
+    return(rep(NA_integer_, length(x)))
+  
   # 3. Normalize the ranks, r to range from (1/n):1
   r_normalized <- r / m
   
@@ -40,6 +44,7 @@ get_rank <- function(x, n = 10) {
   # 5. rounds a number up to the nearest integer
   result <- ceiling(r_scaled)
   
+  # 6. coerces them to R’s integer type.
   return(as.integer(result))
   
 }
