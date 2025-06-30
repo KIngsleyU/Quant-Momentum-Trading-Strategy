@@ -31,6 +31,9 @@ get_rank <- function(x, n = 10) {
   # 2. Count non‐missing observations
   m <- sum(!is.na(x))
   
+  # 3. Normalize the ranks, r to range from (1/n) : 1
+  r_normalized <- r / m
+  
 }
 
 
