@@ -137,7 +137,6 @@ get_portfolio <- function(trader_name = 'momentum',
   # 6. Return the completed portfolio data.table
   
   last_trade = NULL
-  # trader_market <- function(this_date, data = stock, last_trade = NULL)
   
   # Loop over indices 1 to length(date_list)
   for (i in seq_along(date_list)) {
@@ -150,6 +149,7 @@ get_portfolio <- function(trader_name = 'momentum',
 
     # Update portfolio in place using set()
     set(portfolio, i, "ret", this_trade$ret)
+    set(portfolio, i, "turnover", this_trade$turnover)
     
     last_trade <- this_trade
     
