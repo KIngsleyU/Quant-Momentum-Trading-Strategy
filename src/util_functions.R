@@ -180,11 +180,14 @@ plot_portfolio <- function(portfolio) {
   # copied portfolio data to prepare it for plotting
   portfolio_plot <- copy(portfolio)
   
-  # Remove missing returns
-  dt <- dt[!is.na(ret)]
-  
   # Sort table by strategy and date
   setorder(portfolio_plot, strategy, date)
+  
+  # Remove missing returns
+  portfolio_plot <- portfolio_plot[!is.na(ret)]
+  
+  # Compute daily log-returns
+  portfolio_plot[, log_ret := log1p(ret)]
 
   # Step 2: Create the visualization
   #   - Use ggplot for plotting
