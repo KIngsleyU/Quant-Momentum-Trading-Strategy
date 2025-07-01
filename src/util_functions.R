@@ -145,8 +145,11 @@ get_portfolio <- function(trader_name = 'momentum',
     # Extract the i-th date
     d <- date_list[i]
     
+    # Call the trader function
     this_trade <- trader_market(d, data = data, last_trade = last_trade)
 
+    # Update portfolio in place using set()
+    set(portfolio, i, "ret", this_trade$ret)
     
     last_trade <- this_trade
     
