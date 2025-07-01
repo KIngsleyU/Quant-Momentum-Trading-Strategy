@@ -11,6 +11,7 @@
 #
 # Usage: Use these functions in the trader functions and main.R scripts
 
+source("src/trader_market.R")
 
 get_rank <- function(x, n = 10) {
   # Function: get_rank()
@@ -125,6 +126,7 @@ get_portfolio <- function(trader_name = 'momentum',
     turnover = NaN,             # Portfolio turnover (to be calculated)
     w = list(data.table())      # Portfolio weights (to be calculated)
   )
+  portfolio
   
   # Implement the backtesting loop
   # 1. Initialize last_trade as NULL (for the first iteration)
@@ -134,10 +136,25 @@ get_portfolio <- function(trader_name = 'momentum',
   # 5. Update last_trade to this_trade for the next iteration
   # 6. Return the completed portfolio data.table
   
-  ####YOUR CODE HERE####
+  last_trade = NULL
+  # trader_market <- function(this_date, data = stock, last_trade = NULL)
+  
+  for (d in date_list) {
+
+    this_trade <- trader_market(d, data = data, last_trade = last_trade)
+    
+    # Update portfolio IN PLACE
+    portfolio[date == d, ret      := this_trade$ret]
+    portfolio[date == d, turnover := this_trade$turnover]
+    portfolio[date == d, w        := list(this_trade$w)]
+    
+    last_trade <- this_trade
+    
+  }
   
   return(portfolio)
 }
+get_portfolio(trader_name = "market")
 
 
 plot_portfolio <- function(portfolio) {
