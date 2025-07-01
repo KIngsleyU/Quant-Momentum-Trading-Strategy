@@ -188,6 +188,9 @@ plot_portfolio <- function(portfolio) {
   
   # Compute daily log-returns
   portfolio_plot[, log_ret := log1p(ret)]
+  
+  # Compute cumulative log returns by strategy
+  portfolio_plot[, cum_log_ret := cumsum(log_ret), by = strategy]
 
   # Step 2: Create the visualization
   #   - Use ggplot for plotting
