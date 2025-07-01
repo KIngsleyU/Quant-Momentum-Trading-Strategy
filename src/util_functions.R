@@ -179,6 +179,9 @@ plot_portfolio <- function(portfolio) {
 
   # copied portfolio data to prepare it for plotting
   portfolio_plot <- copy(portfolio)
+  
+  # Sort table by strategy and date
+  setorder(portfolio_plot, strategy, date)
 
   # Step 2: Create the visualization
   #   - Use ggplot for plotting
