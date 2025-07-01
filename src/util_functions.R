@@ -180,6 +180,9 @@ plot_portfolio <- function(portfolio) {
   # copied portfolio data to prepare it for plotting
   portfolio_plot <- copy(portfolio)
   
+  # Remove missing returns
+  dt <- dt[!is.na(ret)]
+  
   # Sort table by strategy and date
   setorder(portfolio_plot, strategy, date)
 
