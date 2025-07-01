@@ -139,14 +139,12 @@ get_portfolio <- function(trader_name = 'momentum',
   last_trade = NULL
   # trader_market <- function(this_date, data = stock, last_trade = NULL)
   
-  for (d in date_list) {
-
-    this_trade <- trader_market(d, data = data, last_trade = last_trade)
+  # Loop over indices 1 to length(date_list)
+  for (i in seq_along(date_list)) {
     
-    # Update portfolio IN PLACE
-    portfolio[date == d, ret      := this_trade$ret]
-    portfolio[date == d, turnover := this_trade$turnover]
-    portfolio[date == d, w        := list(this_trade$w)]
+    
+    this_trade <- trader_market(d, data = data, last_trade = last_trade)
+
     
     last_trade <- this_trade
     
