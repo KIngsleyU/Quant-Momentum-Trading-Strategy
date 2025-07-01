@@ -150,6 +150,7 @@ get_portfolio <- function(trader_name = 'momentum',
     # Update portfolio in place using set()
     set(portfolio, i, "ret", this_trade$ret)
     set(portfolio, i, "turnover", this_trade$turnover)
+    et(portfolio, i, "w", list(this_trade$w))
     
     last_trade <- this_trade
     
