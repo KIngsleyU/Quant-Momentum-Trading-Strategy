@@ -1,0 +1,27 @@
+=== MOMENTUM ASSIGNMENT BONUS CHECKPOINT TEST
+Date: 2025-07-01 
+==============================================
+
+Loading util_functions.R...
+✓ util_functions.R loaded successfully
+Checking for stock table in environment...
+✓ stock table found in environment
+
+TEST 1: get_rank function (1 point)
+===================================
+✓ get_rank function tests passed
+
+TEST 2: weighted.mean.na.rm function (1 point)
+==============================================
+✓ weighted.mean.na.rm function tests passed
+
+TEST 3: Required Columns (1 point)
+==================================
+✓ All required calculated columns present
+
+
+=== FINAL SUMMARY ===
+Test 1 (get_rank): PASSED 
+Test 2 (weighted.mean.na.rm): PASSED 
+Test 3 (Required Columns): PASSED 
+Tests passed: 3 / 3

@@ -191,13 +191,23 @@ plot_portfolio <- function(portfolio) {
   
   # Compute cumulative log returns by strategy
   portfolio_plot[, cum_log_ret := cumsum(log_ret), by = strategy]
+  portfolio_plot
 
   # Step 2: Create the visualization
   #   - Use ggplot for plotting
   #   - Plot cumulative log returns over time for each strategy
   #   - Add appropriate labels and formatting  
   
-  plot <-  ###### YOUR CODE HERE ######
+  plot <- ggplot(portfolio_plot, aes(x = date, y = cum_log_ret, color = strategy)) +
+    geom_line(linewidth = 1) +
+    labs(
+      title = "Portfolio Cumulative Log Returns",
+      x = "Date",
+      y = "Cumulative Log Return",
+      color = "Strategy"
+    ) +
+    theme_minimal()
+  
 
   # Step 3: Save the plot to output folder
   #   - Use ggsave() to save the plot to an output folder
@@ -214,4 +224,5 @@ plot_portfolio <- function(portfolio) {
   ggsave("portfolio.png", plot = plot, path = output_dir, width = 10, height = 6)
 
 }
+plot_portfolio(portfolio)
 
