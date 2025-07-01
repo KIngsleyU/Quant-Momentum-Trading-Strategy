@@ -13,6 +13,10 @@
 
 source("src/trader_market.R")
 
+# Load required libraries
+library(data.table)
+library(ggplot2)
+
 get_rank <- function(x, n = 10) {
   # Function: get_rank()
   # Purpose: This function is used to assign stocks to quantile portfolios
@@ -150,7 +154,7 @@ get_portfolio <- function(trader_name = 'momentum',
     # Update portfolio in place using set()
     set(portfolio, i, "ret", this_trade$ret)
     set(portfolio, i, "turnover", this_trade$turnover)
-    et(portfolio, i, "w", list(this_trade$w))
+    set(portfolio, i, "w", list(this_trade$w))
     
     last_trade <- this_trade
     
@@ -158,8 +162,8 @@ get_portfolio <- function(trader_name = 'momentum',
   
   return(portfolio)
 }
-get_portfolio(trader_name = "market")
-
+portfolio <- get_portfolio(trader_name = "market")
+portfolio
 
 plot_portfolio <- function(portfolio) {
   # Function: plot_portfolio()
@@ -173,7 +177,8 @@ plot_portfolio <- function(portfolio) {
   #   - Remove missing values
   #   - Calculate cumulative log returns for each strategy
 
-  ###### YOUR CODE HERE ######
+  # copied portfolio data to prepare it for plotting
+  portfolio_plot <- copy(portfolio)
 
   # Step 2: Create the visualization
   #   - Use ggplot for plotting
