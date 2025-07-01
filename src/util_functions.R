@@ -142,6 +142,8 @@ get_portfolio <- function(trader_name = 'momentum',
   # Loop over indices 1 to length(date_list)
   for (i in seq_along(date_list)) {
     
+    # Extract the i-th date
+    d <- date_list[i]
     
     this_trade <- trader_market(d, data = data, last_trade = last_trade)
 
