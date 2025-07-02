@@ -71,8 +71,13 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
       # If no previous trade data, turnover is undefined
       # This happens on the first day of the backtest
       this_turnover <- NaN
-    }
-  } 
+    } else {
+      
+      # Get weights from the previous trading period
+      last_w <- last_trade$w
+      
+      }
+  }
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
