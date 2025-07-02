@@ -45,11 +45,17 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   # Weights are calculated as each stock's market cap divided by total market cap
   # This creates a value-weighted portfolio that represents the market of stocks 
   # in the bottom momentum decile
-  top_decile <- this_data[ rank == 1, 
+  this_w <- this_data[ rank == 1, 
                            .(permno, 
                              w = lag_mcap / sum(lag_mcap, na.rm = TRUE))]
   
-  
+  # This handles edge cases where all market cap data might be missing
+  if (sum(!is.na(this_w$w)) == 0) {
+    # If no valid weights, return NaN for return and turnover
+    # This prevents errors when there's insufficient data
+    this_ret <- NaN
+    this_turnover <- NaN
+  }
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
