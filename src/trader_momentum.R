@@ -33,9 +33,15 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   # 3- calculate return
   # 4- calculate turnover
 
-  # Step 1: get the data for the current investible universe
+  # get the data for the current investible universe
   # filter the data for the current trading date
+  this_date = "2008-12-24"
   this_data <- data[date == this_date]
+  
+  # the momentum distribution in a decile ranking
+  this_data[rank == 1, rank := get_rank(momentum)]
+  
+  
   
   
   return(list(
