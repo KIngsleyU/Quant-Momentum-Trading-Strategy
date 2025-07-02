@@ -1,6 +1,6 @@
 # File: trader_momentum.R
-# Author: [Your Name]
-# Date: [Current Date]
+# Author: Ogechukwu Umeh
+# Date: 
 #
 # Description: Momentum trading strategy implementations
 # This file contains three different momentum trading strategies:
@@ -35,7 +35,7 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  this_date = "2008-12-24"
+  #this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -43,10 +43,10 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   
   # Now `rank` is an integer vector, so you can filter on it
   # Weights are calculated as each stock's market cap divided by total market cap
-  # This creates a value-weighted portfolio that represents the market of stocks 
+  # This creates a equal-weighted portfolio that represents the market of stocks 
   # in the bottom momentum decile
   this_data[ rank == 1, 
-             w := lag_mcap / sum(lag_mcap, na.rm = TRUE)]
+             w := 1 / .N]
   this_w <- this_data[, .(permno, w)]
   
   # This handles edge cases where all market cap data might be missing
