@@ -128,7 +128,7 @@ trader_momentum_m10 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  #this_date = "2008-12-24"
+  this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -137,8 +137,8 @@ trader_momentum_m10 <- function(this_date, data = stock, last_trade = NULL) {
   # Now `rank` is an integer vector, so you can filter on it
   # Weights are calculated as each stock's market cap divided by total market cap
   # This creates a equal-weighted portfolio that represents the market of stocks 
-  # in the bottom momentum decile
-  this_data[ rank == 1, 
+  # in the top momentum decile
+  this_data[ rank == 10, 
              w := 1 / .N]
   this_w <- this_data[, .(permno, w)]
   
