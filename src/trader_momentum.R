@@ -12,6 +12,8 @@
 #
 # Usage: Call these strategies in main.R
 
+source("src/util_functions.R")
+
 trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   # Function: trader_momentum_m01()
   # Purpose: Implement M01 momentum trading strategy (Losers)
@@ -31,7 +33,10 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   # 3- calculate return
   # 4- calculate turnover
 
-  ######## YOUR CODE HERE ########
+  # Step 1: get the data for the current investible universe
+  # filter the data for the current trading date
+  this_data <- data[date == this_date]
+  
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
