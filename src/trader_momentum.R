@@ -38,9 +38,16 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
   this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
-  # the momentum distribution in a decile ranking
-  this_data[rank == 1, rank := get_rank(momentum)]
+  # the rank the momentum distribution in a decile ranking
+  this_data[, rank := get_rank(momentum)]
   
+  # Now `rank` is an integer vector, so you can filter on it
+  # Weights are calculated as each stock's market cap divided by total market cap
+  # This creates a value-weighted portfolio that represents the market of stocks 
+  # in the bottom momentum decile
+  top_decile <- this_data[ rank == 1, 
+                           .(permno, 
+                             w = lag_mcap / sum(lag_mcap, na.rm = TRUE))]
   
   
   
