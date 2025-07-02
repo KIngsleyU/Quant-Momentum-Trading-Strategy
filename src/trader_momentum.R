@@ -73,8 +73,12 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
       this_turnover <- NaN
     } else {
       
-      # Get weights from the previous trading period
-      last_w <- last_trade$w
+        # Get weights from the previous trading period
+        last_w <- last_trade$w
+        
+        # Merge current and previous weights by stock identifier (permno)
+        merged_w <- merge(this_w, last_w, by = 'permno', all = TRUE, 
+                          suffixes = c('_this', '_last'))
       
       }
   }
