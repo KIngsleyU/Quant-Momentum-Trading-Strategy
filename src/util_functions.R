@@ -12,6 +12,7 @@
 # Usage: Use these functions in the trader functions and main.R scripts
 
 source("src/trader_market.R")
+source("src/trader_momentum.R")
 
 # Load required libraries
 library(data.table)
@@ -149,7 +150,7 @@ get_portfolio <- function(trader_name = 'momentum',
     d <- date_list[i]
     
     # Call the trader function
-    this_trade <- trader_market(d, data = data, last_trade = last_trade)
+    this_trade <- trader(d, data = data, last_trade = last_trade)
 
     # Update portfolio in place using set()
     set(portfolio, i, "ret", this_trade$ret)
@@ -163,6 +164,7 @@ get_portfolio <- function(trader_name = 'momentum',
   return(portfolio)
 }
 portfolio <- get_portfolio(trader_name = "market")
+# portfolio <- get_portfolio(trader_name = "momentum_m01")
 portfolio
 
 plot_portfolio <- function(portfolio) {
