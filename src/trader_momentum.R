@@ -56,7 +56,6 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
     this_ret <- NaN
     this_turnover <- NaN
   } else {
-    
     # Step 3: calculate return
     
     # calculate portfolio return by multiplying weights with individual stock returns
@@ -72,15 +71,32 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
       # This happens on the first day of the backtest
       this_turnover <- NaN
     } else {
+      # Get weights from the previous trading period
+      last_w <- last_trade$w
       
-        # Get weights from the previous trading period
-        last_w <- last_trade$w
+      # Merge current and previous weights by stock identifier (permno)
+      merged_w <- merge(this_w, last_w, by = 'permno', all = TRUE, 
+                        suffixes = c('_this', '_last'))
+      
+      # Check if we have valid previous weights
+      # This handles cases where previous period data might be missing
+      if (sum(!is.na(merged_w$w_last)) == 0) {
+        # If no valid previous weights, turnover is undefined
+        this_turnover <- NaN
+      } else {
+        # Replace NA values with 0 for turnover calculation
+        # This assumes stocks not in the portfolio have zero weight
+        merged_w[is.na(merged_w)] <- 0
         
-        # Merge current and previous weights by stock identifier (permno)
-        merged_w <- merge(this_w, last_w, by = 'permno', all = TRUE, 
-                          suffixes = c('_this', '_last'))
-      
+        # Calculate turnover as half the sum of absolute weight changes
+        # This measures the fraction of portfolio value that was traded
+        # The factor of 1/2 accounts for the fact that buying and selling
+        # the same amount results in turnover equal to that amount
+        this_turnover <- merged_w[, .(
+          sum(abs(w_this - w_last)) / 2
+        )][[1]]
       }
+    }
   }
   
   return(list(
