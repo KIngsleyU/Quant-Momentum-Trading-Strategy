@@ -163,8 +163,9 @@ get_portfolio <- function(trader_name = 'momentum',
   
   return(portfolio)
 }
-portfolio <- get_portfolio(trader_name = "market")
+# portfolio <- get_portfolio(trader_name = "market")
 # portfolio <- get_portfolio(trader_name = "momentum_m01")
+portfolio <- get_portfolio(trader_name = "momentum_m10")
 portfolio
 
 plot_portfolio <- function(portfolio) {
