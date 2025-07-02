@@ -56,13 +56,23 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
     this_ret <- NaN
     this_turnover <- NaN
   } else {
+    
     # Step 3: calculate return
     
     # calculate portfolio return by multiplying weights with individual stock returns
     # and summing across all stocks
     # This gives us the market-weighted return for the current period
     this_ret <- this_w[this_data, .(sum(w * ret, na.rm = TRUE)), on = 'permno'][[1]]
-  }
+    
+    # Step 4: calculate turnover
+    
+    # Turnover measures how much the portfolio composition changed
+    if (is.null(last_trade)) {
+      # If no previous trade data, turnover is undefined
+      # This happens on the first day of the backtest
+      this_turnover <- NaN
+    }
+  } 
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
