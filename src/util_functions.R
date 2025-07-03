@@ -131,7 +131,7 @@ get_portfolio <- function(trader_name = 'momentum',
     turnover = NaN,             # Portfolio turnover (to be calculated)
     w = list(data.table())      # Portfolio weights (to be calculated)
   )
-  portfolio
+  
   
   # Implement the backtesting loop
   # 1. Initialize last_trade as NULL (for the first iteration)
@@ -165,8 +165,9 @@ get_portfolio <- function(trader_name = 'momentum',
 }
 # portfolio <- get_portfolio(trader_name = "market")
 # portfolio <- get_portfolio(trader_name = "momentum_m01")
-portfolio <- get_portfolio(trader_name = "momentum_m10")
-portfolio
+# portfolio <- get_portfolio(trader_name = "momentum_m10")
+# portfolio <- get_portfolio(trader_name = "momentum_wml")
+# portfolio
 
 plot_portfolio <- function(portfolio) {
   # Function: plot_portfolio()
@@ -227,5 +228,5 @@ plot_portfolio <- function(portfolio) {
   ggsave("portfolio.png", plot = plot, path = output_dir, width = 10, height = 6)
 
 }
-plot_portfolio(portfolio)
+# plot_portfolio(portfolio)
 

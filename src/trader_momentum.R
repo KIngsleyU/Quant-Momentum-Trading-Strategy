@@ -35,7 +35,7 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  this_date = "2008-12-24"
+  #this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -128,7 +128,7 @@ trader_momentum_m10 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  this_date = "2008-12-24"
+  #this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -227,7 +227,7 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   
   # calculate by  subtracting the returns of 
   # the lowest momentum decile from the highest (M10 - M01)
-  ret <- m10$ret - m01$ret
+  this_ret <- m10$ret - m01$ret
   
   # to get the weights
   # Extract the inner data.tables weights weights for strategy M10
@@ -240,7 +240,8 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   dt10[ permno %in% dt01[!is.na(w), permno], w := dt01[!is.na(w), w] ]
   this_w <- dt10
   
-  # calculated turnover by summing the of both strategies
+  # calculated turnover by summing the of both strategies, since half the sum of 
+  # absolute weight changes
   this_turnover <- m10$turnover + m01$turnover
   
   return(list(
