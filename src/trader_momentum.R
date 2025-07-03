@@ -219,7 +219,10 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   # 3- calculate return
   # 4- calculate turnover
 
-  ######## YOUR CODE HERE ########
+  # perform long position
+  m10 <- trader_momentum_m10(this_date, data = data, last_trade = last_trade)
+  
+  
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
