@@ -238,8 +238,10 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   
   # merge the weights from both strategies
   dt10[ permno %in% dt01[!is.na(w), permno], w := dt01[!is.na(w), w] ]
-  w <- dt10
+  this_w <- dt10
   
+  # calculated turnover by summing the of both strategies
+  this_turnover <- m10$turnover + m01$turnover
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
