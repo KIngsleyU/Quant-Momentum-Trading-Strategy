@@ -11,8 +11,8 @@
 #
 # Usage: Use these functions in the trader functions and main.R scripts
 
-source("src/trader_market.R")
-source("src/trader_momentum.R")
+# source("src/trader_market.R")
+# source("src/trader_momentum.R")
 
 # Load required libraries
 library(data.table)
