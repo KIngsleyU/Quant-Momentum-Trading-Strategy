@@ -229,6 +229,13 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   # the lowest momentum decile from the highest (M10 - M01)
   ret <- m10$ret - m01$ret
   
+  # to get the weights
+  # Extract the inner data.tables weights weights for strategy M10
+  dt10 <- m10$w[[1]]
+  
+  # Extract the inner data.tables weights weights for strategy M01
+  dt01 <- m01$w[[1]]
+  
   return(list(
     ret = this_ret,        # Portfolio return for this period
     turnover = this_turnover,  # Portfolio turnover (trading activity)
