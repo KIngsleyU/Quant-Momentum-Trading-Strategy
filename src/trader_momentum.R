@@ -236,6 +236,11 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   # Extract the inner data.tables weights weights for strategy M01
   dt01 <- m01$w[[1]]
   
+  # merge the weights from both strategies
+  dt10[ permno %in% dt01[!is.na(w), permno], w := dt01[!is.na(w), w] ]
+  w <- dt10
+  
+  
   return(list(
     ret = this_ret,        # Portfolio return for this period
     turnover = this_turnover,  # Portfolio turnover (trading activity)
