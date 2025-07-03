@@ -35,7 +35,7 @@ trader_momentum_m01 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  #this_date = "2008-12-24"
+  this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -128,7 +128,7 @@ trader_momentum_m10 <- function(this_date, data = stock, last_trade = NULL) {
 
   # get the data for the current investible universe
   # filter the data for the current trading date
-  #this_date = "2008-12-24"
+  this_date = "2008-12-24"
   this_data <- data[date == this_date]
   
   # the rank the momentum distribution in a decile ranking
@@ -138,7 +138,7 @@ trader_momentum_m10 <- function(this_date, data = stock, last_trade = NULL) {
   # Weights are calculated as each stock's market cap divided by total market cap
   # This creates a equal-weighted portfolio that represents the market of stocks 
   # in the bottom momentum decile
-  this_data[ rank == 1, 
+  this_data[ rank == 10, 
              w := 1 / .N]
   this_w <- this_data[, .(permno, w)]
   
@@ -222,8 +222,12 @@ trader_momentum_wml <- function(this_date, data = stock, last_trade = NULL) {
   # perform long position
   m10 <- trader_momentum_m10(this_date, data = data, last_trade = last_trade)
   
-  # perform short position
+  # perform short position 
   m01 <- trader_momentum_m01(this_date, data = data, last_trade = last_trade)
+  
+  # calculate by  subtracting the returns of 
+  # the lowest momentum decile from the highest (M10 - M01)
+  ret <- m10$ret - m01$ret
   
   return(list(
     ret = this_ret,        # Portfolio return for this period
